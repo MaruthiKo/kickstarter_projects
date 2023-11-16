@@ -51,8 +51,10 @@ class Model:
 
     def evaulate(self):
         y_pred = self.pipeline().predict(self.X_test)
-        print("Accuracy:",accuracy_score(self.y_test,y_pred))
-        print("F1_score:",f1_score(self.y_test,y_pred))
+        accuracy = accuracy_score(self.y_test,y_pred) * 100
+        f1 = f1_score(self.y_test,y_pred) * 100
+        print("Accuracy:", round(accuracy,2))
+        print("F1_score:", round(f1, 2))
 
 if __name__ == "__main__":
     preprocessor = DataPreprocessor("data/data.csv")
@@ -60,4 +62,4 @@ if __name__ == "__main__":
     knn = KNeighborsClassifier()
     model = Model(df, knn)
     model.dump()
-    model.evaulate()
+    # model.evaulate() # Uncomment to evaluate the model
