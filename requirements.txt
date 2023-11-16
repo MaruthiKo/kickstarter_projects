@@ -5,3 +5,4 @@ mysql-connector-python
 sqlalchemy
 fastapi
 uvicorn[standard]
+streamlit
