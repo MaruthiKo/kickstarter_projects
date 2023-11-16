@@ -18,7 +18,7 @@ class DataPreprocessor():
 
         # Drop unnecesary columns    
         df = self.df.drop('Unnamed: 0',axis=1)
-
+        df["sub_category"] = df["sub_category"].fillna("Not Applicable")
         return df
 class Model:
     def __init__(self,df: pd.DataFrame, model):
