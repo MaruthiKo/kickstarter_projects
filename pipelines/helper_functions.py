@@ -1,4 +1,6 @@
 from datetime import datetime
+from urllib.request import urlretrieve
+from zipfile import ZipFile
 
 def datetime_converter(integer):
     # Given integer representing a Unix timestamp
@@ -14,3 +16,10 @@ def datetime_converter(integer):
 def day_extractor(x):
     day = x.split(" ")[0]
     return int(day)
+
+def downloader():
+    url = "https://s3.amazonaws.com/weruns/forfun/Kickstarter/Kickstarter_2023-10-12T03_20_02_365Z.zip"
+    path = "../data/csv_files/raw_data.zip"
+    urlretrieve(url, path)
+    with ZipFile(path, 'r') as zipObj:
+        zipObj.extractall("../data/csv_files/")

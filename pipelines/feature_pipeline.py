@@ -4,9 +4,7 @@ from mysql.connector import Error
 import pandas as pd
 from sqlalchemy import create_engine
 import json 
-from helper_functions import datetime_converter, day_extractor
-from pathlib import Path
-
+from helper_functions import datetime_converter, day_extractor, downloader
 
 class CleanDF:
     """
@@ -188,7 +186,7 @@ class SQL:
             print("Error while connecting to MYSQL",e)
 
 
-    def insert_all(self):
+    def insert(self):
         file_path = "../data/csv_files/Kickstarter.csv"
         data = CleanDF(file_path)
         cleaned_df = data.clean_df()
@@ -223,7 +221,7 @@ class SQL:
     
     def df_to_table(self, df: pd.DataFrame, table_name: str):
         """
-        This function converts the dataframe into a table
+        This function converts the dataframe into a table, if the table exists it will replace the existing table
 
         Args:
             df (pd.DataFrame): dataframe to be converted into a table
@@ -236,6 +234,14 @@ class SQL:
         return df.to_sql(table_name, con=self.engine, index=False, if_exists='replace')
 
 
-
+### Run the file by replacing your details in the SQL class to create your own database and table
+if __name__  == "__main__":
+    response = input("Do you want to download the raw_data? (y/n): ")
+    if response == "y":
+        downloader()
+    my_sql = SQL("localhost", "root", "Maruthi#182005", "kickstarter", "projects")
+    my_sql.create_db()
+    my_sql.create_table()
+    my_sql.insert()
 
 
