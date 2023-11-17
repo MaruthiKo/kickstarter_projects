@@ -1,9 +1,15 @@
-FROM tiangolo/uvicorn-gunicorn:python3.10
+FROM python:3.10
 
-COPY ./requirements.txt /requirements.txt
+COPY requirements.txt app/requirements.txt
 
-RUN pip install -r /requirements.txt
+WORKDIR /app
 
-COPY ./models /models
+RUN pip install -r requirements.txt
 
-COPY ./app /app
+COPY . .
+
+EXPOSE 8501
+
+ENTRYPOINT ["streamlit","run"]
+
+CMD ["app.py"]
