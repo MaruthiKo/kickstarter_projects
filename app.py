@@ -31,7 +31,7 @@ def run():
     }
 
     if st.button("Predict"):
-        response = requests.post("http://127.0.0.1:8000/predict", json=data)
+        response = requests.post("http://backend.docker:8000/predict", json=data)
         prediction = response.json()
         if prediction == "1":
             st.success("The project is going to be successful")

@@ -7,7 +7,7 @@ import joblib
 
 app = FastAPI(title='Project Success Prediction', version='1.0', description='KNN Model is used for prediciton')
 
-model = joblib.load('../models/success_pred_model.pkl')
+model = joblib.load('./success_pred_model.pkl')
 
 class Data(BaseModel):
     parent_category: str
